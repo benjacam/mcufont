@@ -176,6 +176,8 @@ static void write_bin_codeword(const struct mf_rlefont_s *font,
     
     if (runlen)
         write_pixels(rstate, runlen, 255);
+
+    (void)font;
 }
 
 /* Decode and write out a reference codeword */

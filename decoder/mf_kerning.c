@@ -22,6 +22,7 @@ static void fit_leftedge(int16_t x, int16_t y, uint8_t count, uint8_t alpha,
         if (x < s->edgepos[zone])
             s->edgepos[zone] = x;
     }
+    (void)count;
 }
 
 /* Pixel callback for analyzing the right edge of a glyph. */
