@@ -134,4 +134,7 @@ MF_EXTERN const struct mf_font_s *mf_find_font(const char *name);
 /* Get the list of included fonts */
 MF_EXTERN const struct mf_font_list_s *mf_get_font_list();
 
+/* Add a font */
+MF_EXTERN void mf_add_font(struct mf_font_list_s * font);
+
 #endif

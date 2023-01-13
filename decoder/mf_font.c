@@ -8,6 +8,8 @@
 #include MF_FONT_FILE_NAME
 /* Include fonts end here */
 
+const struct mf_font_list_s *font_list = MF_INCLUDED_FONTS;
+
 uint8_t mf_render_character(const struct mf_font_s *font,
                             int16_t x0, int16_t y0,
                             mf_char character,
@@ -98,9 +100,8 @@ static bool strequals(const char *a, const char *b)
 
 const struct mf_font_s *mf_find_font(const char *name)
 {
-    const struct mf_font_list_s *f;
-    f = MF_INCLUDED_FONTS;
-    
+    const struct mf_font_list_s *f = font_list;
+
     while (f)
     {
         if (strequals(f->font->full_name, name) ||
@@ -117,6 +118,11 @@ const struct mf_font_s *mf_find_font(const char *name)
 
 const struct mf_font_list_s *mf_get_font_list()
 {
-    return MF_INCLUDED_FONTS;
+    return font_list;
 }
 
+MF_EXTERN void mf_add_font(struct mf_font_list_s * font)
+{
+    font->next = font_list;
+    font_list = font;
+}
