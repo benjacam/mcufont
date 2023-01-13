@@ -1,0 +1,6 @@
+add_library(mcufont_decoder INTERFACE)
+set(SRC_LIST mf_bwfont mf_encoding mf_font mf_justify mf_kerning mf_rlefont mf_scaledfont mf_wordwrap)
+list(TRANSFORM SRC_LIST PREPEND ${CMAKE_CURRENT_LIST_DIR}/)
+list(TRANSFORM SRC_LIST APPEND ".c")
+target_sources(mcufont_decoder INTERFACE ${SRC_LIST})
+target_include_directories(mcufont_decoder INTERFACE ${CMAKE_CURRENT_LIST_DIR})
