@@ -16,13 +16,15 @@ enum mf_align_t
 };
 
 /* Callback for rendering a single character.
+ * font:        The font of the single character.
  * x0:          Left edge of the target position of character.
  * y0:          Upper edge of the target position of character.
  * character:   Character to render.
  * state:       Free state variable for use by the callback.
  * Returns the width of the character.
  */
-typedef uint8_t (*mf_character_callback_t) (int16_t x0, int16_t y0,
+typedef uint8_t (*mf_character_callback_t) (const struct mf_font_s *font,
+                                            int16_t x0, int16_t y0,
                                             mf_char character, void *state);
 
 /* Get width of a string in pixels.

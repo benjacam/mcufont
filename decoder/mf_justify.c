@@ -133,7 +133,7 @@ static void render_left(const struct mf_font_s *font,
         if (c1 != 0)
             x += mf_compute_kerning(font, c1, c2);
 
-        x += callback(x, y0, c2, state);
+        x += callback(font, x, y0, c2, state);
         c1 = c2;
     }
 }
@@ -196,7 +196,7 @@ static void render_right(const struct mf_font_s *font,
         if (c2 != 0)
             x -= mf_compute_kerning(font, c1, c2);
         
-        callback(x, y0, c1, state);
+        callback(font, x, y0, c1, state);
         c2 = c1;
     }
 }
@@ -322,7 +322,7 @@ void mf_render_justified(const struct mf_font_s *font,
                 adjustment -= tmp;
             }
 
-            x += callback(x, y0, c2, state);
+            x += callback(font, x, y0, c2, state);
             c1 = c2;
         }
     }
