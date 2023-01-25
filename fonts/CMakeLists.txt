@@ -1,3 +1,5 @@
+if(CMAKE_CROSSCOMPILING)
+
 find_package(mfencoder)
 
 set(FONTS DejaVuSans)
@@ -40,3 +42,5 @@ add_custom_target(generate_custom_header DEPENDS ${font_h_list})
 add_library(mcufont_fonts INTERFACE)
 add_dependencies(mcufont_fonts generate_custom_header)
 target_include_directories(mcufont_fonts INTERFACE ${CMAKE_CURRENT_BINARY_DIR})
+
+endif()
