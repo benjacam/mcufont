@@ -3,7 +3,7 @@ if(CMAKE_CROSSCOMPILING)
 find_package(mfencoder)
 
 set(FONTS DejaVuSans)
-set(PIXEL_SIZES 12 16 32)
+set(PIXEL_SIZES 12)# 16 32)
 set(RANGES "0-255 0x2010-0x2015")
 set(ITERATIONS 1)# todo 50)
 set(font_h_text "")
