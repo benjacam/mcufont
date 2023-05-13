@@ -1,6 +1,14 @@
-if(CMAKE_CROSSCOMPILING)
+cmake_minimum_required(VERSION 3.22)
 
-find_package(mfencoder)
+include(ExternalProject)
+ExternalProject_Add(mfencoder
+   SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/../encoder
+   PREFIX ${CMAKE_CURRENT_BINARY_DIR}/mfencoder
+   INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}
+   CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}
+)
+
+set(MFENC ${CMAKE_CURRENT_BINARY_DIR}/bin/mfencoder)
 
 set(FONTS DejaVuSans)
 set(PIXEL_SIZES 12)# 16 32)
@@ -19,10 +27,10 @@ foreach(font ${FONTS})
       string(APPEND font_h_text "#include <${h_name}>\\n")
       add_custom_command(
          OUTPUT ${h_name}
-         COMMAND mfencoder import_ttf ${CMAKE_CURRENT_LIST_DIR}/${font}.ttf ${size} bw
-         COMMAND mfencoder filter ${dat_name} ${RANGES}
-         COMMAND mfencoder rlefont_optimize ${dat_name} ${ITERATIONS}
-         COMMAND mfencoder bwfont_export ${dat_name}
+         COMMAND ${MFENC} import_ttf ${CMAKE_CURRENT_LIST_DIR}/${font}.ttf ${size} bw
+         COMMAND ${MFENC} filter ${dat_name} ${RANGES}
+         COMMAND ${MFENC} rlefont_optimize ${dat_name} ${ITERATIONS}
+         COMMAND ${MFENC} bwfont_export ${dat_name}
          COMMAND cp ${CMAKE_CURRENT_LIST_DIR}/${output_name}.c ${h_name}
          DEPENDS mfencoder
          DEPENDS ${CMAKE_CURRENT_LIST_DIR}/${font}.ttf
@@ -42,5 +50,3 @@ add_custom_target(generate_custom_header DEPENDS ${font_h_list})
 add_library(mcufont_fonts INTERFACE)
 add_dependencies(mcufont_fonts generate_custom_header)
 target_include_directories(mcufont_fonts INTERFACE ${CMAKE_CURRENT_BINARY_DIR})
-
-endif()

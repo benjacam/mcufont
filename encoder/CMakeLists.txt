@@ -1,31 +1,32 @@
-if(NOT CMAKE_CROSSCOMPILING)
-   find_package(Freetype REQUIRED)
-   find_package(Threads REQUIRED)
-   include_directories(${FREETYPE_INCLUDE_DIRS})
-   set(CMAKE_CXX_STANDARD 14)
-   add_executable(mfencoder
-      bdf_import.cc
-      bdf_import.hh
-      ccfixes.hh
-      datafile.cc
-      datafile.hh
-      encode_rlefont.cc
-      encode_rlefont.hh
-      export_bwfont.cc
-      export_bwfont.hh
-      export_rlefont.cc
-      export_rlefont.hh
-      exporttools.cc
-      exporttools.hh
-      freetype_import.cc
-      freetype_import.hh
-      gb2312_in_ucs2.h
-      importtools.cc
-      importtools.hh
-      main.cc
-      optimize_rlefont.cc
-      optimize_rlefont.hh)
-   target_include_directories(mfencoder PRIVATE ${CMAKE_CURRENT_LIST_DIR})
-   target_link_libraries(mfencoder ${FREETYPE_LIBRARIES} Threads::Threads)
-   export(TARGETS mfencoder FILE "${CMAKE_BINARY_DIR}/mfencoder-config.cmake")
-endif()
+cmake_minimum_required(VERSION 3.22)
+project(mfencoder)
+
+find_package(Freetype REQUIRED)
+find_package(Threads REQUIRED)
+include_directories(${FREETYPE_INCLUDE_DIRS})
+set(CMAKE_CXX_STANDARD 14)
+add_executable(mfencoder
+   bdf_import.cc
+   bdf_import.hh
+   ccfixes.hh
+   datafile.cc
+   datafile.hh
+   encode_rlefont.cc
+   encode_rlefont.hh
+   export_bwfont.cc
+   export_bwfont.hh
+   export_rlefont.cc
+   export_rlefont.hh
+   exporttools.cc
+   exporttools.hh
+   freetype_import.cc
+   freetype_import.hh
+   gb2312_in_ucs2.h
+   importtools.cc
+   importtools.hh
+   main.cc
+   optimize_rlefont.cc
+   optimize_rlefont.hh)
+target_include_directories(mfencoder PRIVATE ${CMAKE_CURRENT_LIST_DIR})
+target_link_libraries(mfencoder ${FREETYPE_LIBRARIES} Threads::Threads)
+install(TARGETS mfencoder)
