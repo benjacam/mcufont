@@ -24,7 +24,7 @@ foreach(font ${FONTS})
       set(h_name ${CMAKE_CURRENT_BINARY_DIR}/${output_name}.h)
       set(dat_name ${CMAKE_CURRENT_LIST_DIR}/${output_name}.dat)
       list(APPEND font_h_list ${h_name})
-      string(APPEND font_h_text "#include <${h_name}>\\n")
+      string(APPEND font_h_text "#include <${h_name}>")
       add_custom_command(
          OUTPUT ${h_name}
          COMMAND ${MFENC} import_ttf ${CMAKE_CURRENT_LIST_DIR}/${font}.ttf ${size} bw
